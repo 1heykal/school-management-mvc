@@ -1,0 +1,59 @@
+﻿@model Student
+@{
+    Layout = "~/views/shared/_Layout1.cshtml";
+    ViewBag.Title = "Edit";
+}
+
+
+    <h1>Edit a student's record</h1>
+    <form method="post">
+        <table class="table table-hover table-bordered">
+            <tr>
+
+            <input hidden asp-for="Id" value="@Model.Id"/>
+                    
+            </tr>
+            <br />
+            <tr>
+                <label asp-for="Name"> </label>
+                    <input asp-for="Name" value="@Model.Name"/>
+                    <span asp-validation-for="Name"></span>
+               
+            </tr>
+        <br />
+            <tr>
+                <label asp-for="Age"></label>      
+                    <input asp-for="Age" value="@Model.Age"/>
+                <span asp-validation-for="Age"></span>
+            </tr>
+        <br />
+            <tr>
+                <label asp-for="Email"> </label>    
+                    <input asp-for="Email"  value="@Model.Email"/>
+                <span asp-validation-for="Email"></span>
+            </tr>
+        <br />
+            <tr>
+                <label asp-for="Password"></label>       
+                    <input type="password" asp-for="Password"/>
+                <span asp-validation-for="Password"></span>
+            </tr>
+        <br />
+            <tr>
+                <label asp-for="CPassword"></label>      
+                    <input type="password"  asp-for="CPassword"/>
+               <span asp-validation-for="CPassword"></span>
+            </tr>
+        <br />
+            <tr>
+                 <label asp-for="Dno"> </label>
+                  <select asp-for="Dno" asp-items="ViewBag.departments"></select>
+            </tr>
+
+            </table>
+        <input type="submit" class="btn btn-success" value="Update"/>
+    </form>
+@section scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    }

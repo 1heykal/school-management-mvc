@@ -1,0 +1,29 @@
+﻿@model Department
+@{
+    Layout = "~/views/shared/_Layout1.cshtml";
+    ViewBag.Title = "Edit";
+}
+
+    <h1>Edit a Department</h1>
+    <form method="post">
+        <table class="table table-hover table-bordered">
+            <tr>
+                <label hidden>
+                    ID
+                    <input type="text" name="id" value="@Model.Id" />
+                </label>
+            </tr>
+            <tr>
+                <label asp-for="Name"></label>
+                <input  type="text" asp-for="Name" value="@Model.Name" />
+                <span asp-validation-for="Name"></span>
+            </tr>
+        </table>
+
+        <input type="submit" class="btn btn-success" value="Update" />
+    </form>
+    @section scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    }
+    

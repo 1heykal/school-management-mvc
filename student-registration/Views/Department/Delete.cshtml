@@ -1,0 +1,25 @@
+﻿@model Department
+@{
+    Layout = "~/views/shared/_Layout1.cshtml";
+    ViewBag.Title = "Delete";
+}
+
+    <form method="post">
+        <header>Are you sure you want to delete the department with this record?</header>
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr><th>ID</th> <th>Name</th></tr>
+            </thead>
+            <tbody>
+                <tr> <td>@Model.Id</td><td>@Model.Name</td> </tr>
+            </tbody>
+        </table>
+        <input type="submit" value="Confirm" class="btn btn-danger" />
+        <a href="/Department/index">
+            <input type="button" value="Cancel" class="btn btn-light" />
+        </a>
+
+
+    </form>
+
+

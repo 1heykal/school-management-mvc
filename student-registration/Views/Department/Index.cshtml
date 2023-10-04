@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Department> 
+@{
+    Layout = "~/views/shared/_Layout1.cshtml";
+    ViewBag.Title = "Index";
+}
+
+    <a href="/Department/create" class="btn btn-success">Create</a> 
+    <a href="/Student/index" class="btn btn-info">Students</a>
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr><th>ID</th><th>Name</th><th>Operations</th></tr>
+        </thead>
+        <tbody>
+            @foreach(var d in Model)
+            {
+                <tr>
+                    <td>@d.Id</td>
+                    <td>@d.Name</td>
+                    <td>
+                        <a href="/Department/Details/@d.Id" class="btn btn-info">Details</a>
+                        <a href="/Department/Edit/@d.Id" class="btn btn-success">Update</a>
+                        <a href="/Department/Delete/@d.Id" class="btn btn-danger">Delete</a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+
+
+
+
+
