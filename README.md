@@ -9,4 +9,4 @@ Asp.NET core project with CRUD operations
 * update it
 * delete it
 
-## The app works with sql server database
+## The app uses mssql server database
