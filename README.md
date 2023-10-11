@@ -1,7 +1,7 @@
 # student-registration
 Asp.NET core project with CRUD operations
 | Controllers |           Operations         |
-|:------------|-----------------------------:|
+|:------------|:----------------------------:|
 | Student     | Create, Read, Update, Delete |
 | Department  | Create, Read, Update, Delete |
 
