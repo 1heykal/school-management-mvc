@@ -73,3 +73,6 @@ E:\Development\asp.net\student-registration\student-registration\obj\Debug\net7.
 E:\Development\asp.net\student-registration\student-registration\obj\Debug\net7.0\student-registration.pdb
 E:\Development\asp.net\student-registration\student-registration\obj\Debug\net7.0\student-registration.genruntimeconfig.cache
 E:\Development\asp.net\student-registration\student-registration\obj\Debug\net7.0\ref\student-registration.dll
+E:\Development\asp.net\student-registration\student-registration\bin\Debug\net7.0\Auth0.AspNetCore.Authentication.dll
+E:\Development\asp.net\student-registration\student-registration\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
+E:\Development\asp.net\student-registration\student-registration\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

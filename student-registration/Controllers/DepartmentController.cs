@@ -5,10 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace student_registration.Controllers
 {
+    [Authorize]
     public class DepartmentController : Controller
     {
         IDepartment db;
@@ -17,6 +18,8 @@ namespace student_registration.Controllers
         {
             db = _db;
         }
+
+   
         public IActionResult Details(Department department)
         {
             Department dept = db.GetByID(department.Id);
@@ -62,6 +65,7 @@ namespace student_registration.Controllers
             return View(db.GetByID(id));
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var model = db.GetAll();
@@ -78,6 +82,7 @@ namespace student_registration.Controllers
 
         public IActionResult Delete(int? id)
         {
+          
             return View(db.GetByID(id.Value));
         }
 
