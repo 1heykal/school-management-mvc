@@ -7,9 +7,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace student_registration.Controllers
 {
+    [Authorize]
     public class StudentController : Controller
     {
         IStudent db;
@@ -20,7 +22,7 @@ namespace student_registration.Controllers
             db = _db;
         }
 
-        
+        [Authorize]
         public IActionResult Details(Student student)
         {   
             Student stu = db.GetByID(student.Id);
