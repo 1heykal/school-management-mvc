@@ -8,11 +8,11 @@ Asp.NET core project with CRUD operations
 
 ## The app uses mssql server database
 
-### Authentication And Authorization
+## Authentication And Authorization
 ```JSON
 "Auth0": {
   "Domain": "{yourDomain}",
   "ClientId": "{yourClienId}"
 }
 ```
-### replace {yourDomain} and {yourClientId} with yours, can be found in JWT auth0 Application Settings
+ replace `{yourDomain}` and `{yourClientId}` with yours, can be found in JWT auth0 Application Settings
