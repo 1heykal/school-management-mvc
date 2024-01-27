@@ -22,7 +22,7 @@ namespace student_registration.Controllers
             db = _db;
         }
 
-        [Authorize]
+       // [Authorize]
         public IActionResult Details(Student student)
         {   
             Student stu = db.GetByID(student.Id);
@@ -116,8 +116,10 @@ namespace student_registration.Controllers
             return View(st);
         }
 
+        [Authorize]
         public IActionResult Index()
         {
+            var s = User.Identity.Name;
             var model = db.GetAll();
             return View(model);
         }
@@ -125,7 +127,6 @@ namespace student_registration.Controllers
         [HttpPost]
         public IActionResult Delete(Student student)
         {
-      
             db.Delete(student.Id);
             return RedirectToAction("Index");
         }

@@ -1,8 +1,12 @@
 using Auth0.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using student_registration.BLL;
+using student_registration.Models;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,15 +14,33 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<IStudent, StudentBLL>();
-builder.Services.AddScoped<IDepartment, DepartmentBLL>();
+
 builder.Services.AddSession();
 
-builder.Services.AddAuth0WebAppAuthentication(options =>
+string connectionString = builder.Configuration.GetConnectionString("CS");
+
+builder.Services.AddDbContext<ITIContext>(optionBuilder =>
+{
+    optionBuilder.UseSqlServer(connectionString);
+});
+
+
+//register usermanger, rolemanager => rolestore
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(
+    // options => options.Password.RequireDigit = true -- default - no need
+    )
+    .AddEntityFrameworkStores<ITIContext>();
+
+builder.Services.AddScoped<IStudent, StudentBLL>();
+builder.Services.AddScoped<IDepartment, DepartmentBLL>();
+
+/*builder.Services.AddAuth0WebAppAuthentication(options =>
 {
     options.Domain = builder.Configuration["Auth0:Domain"];
     options.ClientId = builder.Configuration["Auth0:ClientId"];
-});
+});*/
+
+
 
 //builder.Services.AddAuthentication(options =>
 //{
@@ -57,6 +79,8 @@ app.UseRouting();
 app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
+
+
 
 app.MapControllerRoute(
     name: "default",

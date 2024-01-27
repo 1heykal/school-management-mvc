@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace student_registration.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class DepartmentController : Controller
     {
         IDepartment db;
