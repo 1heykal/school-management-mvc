@@ -1,49 +1,55 @@
-﻿using student_registration.Models;
+﻿using SchoolManagement.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using SchoolManagement.Data;
 
-namespace student_registration.BLL
+namespace SchoolManagement.BLL
 {
     public class DepartmentBLL : IDepartment
     {
-        ITIContext context = new();
+        private readonly SchoolContext _context;
+
+        public DepartmentBLL(SchoolContext context)
+        {
+            _context = context;
+        }
 
         public Department GetByID(int Id)
         {
-            return context.Departments.FirstOrDefault(d => d.Id == Id);
+            return _context.Departments.Find(Id);
         }
 
         public List<Department> GetAll()
         {
-            return context.Departments.ToList();
+            return _context.Departments.ToList();
         }
 
         public Department Add(Department department)
         {
-            context.Departments.Add(department);
-            context.SaveChanges();
+            _context.Departments.Add(department);
+            _context.SaveChanges();
             return department;
         }
 
         public Department Edit(Department department)
         {
-            context.Departments.Update(department);
-            context.SaveChanges();
+            _context.Departments.Update(department);
+            _context.SaveChanges();
             return department;
         }
 
         public void Delete(int id)
         {
             var dept = GetByID(id);
-            if(!context.Students.Any(s => s.Dno == id))
+            if (!_context.Students.Any(s => s.Dno == id))
             {
-                context.Departments.Remove(dept);
-                context.SaveChanges();
+                _context.Departments.Remove(dept);
+                _context.SaveChanges();
             }
 
-            
-      
+
+
         }
     }
 }

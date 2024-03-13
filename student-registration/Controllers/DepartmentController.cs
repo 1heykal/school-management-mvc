@@ -1,5 +1,5 @@
-﻿using student_registration.BLL;
-using student_registration.Models;
+﻿using SchoolManagement.BLL;
+using SchoolManagement.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,19 +7,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 
-namespace student_registration.Controllers
+namespace SchoolManagement.Controllers
 {
     //[Authorize]
     public class DepartmentController : Controller
     {
-        IDepartment db;
+        private readonly IDepartment db;
 
         public DepartmentController(IDepartment _db)
         {
             db = _db;
         }
 
-   
+
         public IActionResult Details(Department department)
         {
             Department dept = db.GetByID(department.Id);
@@ -82,7 +82,7 @@ namespace student_registration.Controllers
 
         public IActionResult Delete(int? id)
         {
-          
+
             return View(db.GetByID(id.Value));
         }
 

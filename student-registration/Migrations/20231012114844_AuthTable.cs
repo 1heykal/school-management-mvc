@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace student_registration.Migrations
+namespace SchoolManagement.Migrations
 {
     /// <inheritdoc />
     public partial class AuthTable : Migration

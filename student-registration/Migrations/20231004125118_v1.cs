@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace student_registration.Migrations
+namespace SchoolManagement.Migrations
 {
     /// <inheritdoc />
     public partial class v1 : Migration

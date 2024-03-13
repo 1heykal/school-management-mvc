@@ -5,13 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using student_registration.Models;
+using SchoolManagement.Data;
+
 
 #nullable disable
 
-namespace student_registration.Migrations
+namespace SchoolManagement.Migrations
 {
-    [DbContext(typeof(ITIContext))]
+    [DbContext(typeof(SchoolContext))]
     [Migration("20231004125118_v1")]
     partial class v1
     {
@@ -25,7 +26,7 @@ namespace student_registration.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("student_registration.Models.Department", b =>
+            modelBuilder.Entity("SchoolManagement.Models.Department", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -42,7 +43,7 @@ namespace student_registration.Migrations
                     b.ToTable("Departments");
                 });
 
-            modelBuilder.Entity("student_registration.Models.Student", b =>
+            modelBuilder.Entity("SchoolManagement.Models.Student", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -78,16 +79,16 @@ namespace student_registration.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("student_registration.Models.Student", b =>
+            modelBuilder.Entity("SchoolManagement.Models.Student", b =>
                 {
-                    b.HasOne("student_registration.Models.Department", "Department")
+                    b.HasOne("SchoolManagement.Models.Department", "Department")
                         .WithMany("Students")
                         .HasForeignKey("Dno");
 
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("student_registration.Models.Department", b =>
+            modelBuilder.Entity("SchoolManagement.Models.Department", b =>
                 {
                     b.Navigation("Students");
                 });

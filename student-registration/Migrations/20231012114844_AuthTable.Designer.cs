@@ -5,13 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using student_registration.Models;
+using SchoolManagement.Data;
+
 
 #nullable disable
 
-namespace student_registration.Migrations
+namespace SchoolManagement.Migrations
 {
-    [DbContext(typeof(ITIContext))]
+    [DbContext(typeof(SchoolContext))]
     [Migration("20231012114844_AuthTable")]
     partial class AuthTable
     {
@@ -158,7 +159,7 @@ namespace student_registration.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("student_registration.Models.ApplicationUser", b =>
+            modelBuilder.Entity("SchoolManagement.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -226,7 +227,7 @@ namespace student_registration.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("student_registration.Models.Department", b =>
+            modelBuilder.Entity("SchoolManagement.Models.Department", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -243,7 +244,7 @@ namespace student_registration.Migrations
                     b.ToTable("Departments");
                 });
 
-            modelBuilder.Entity("student_registration.Models.Student", b =>
+            modelBuilder.Entity("SchoolManagement.Models.Student", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -290,7 +291,7 @@ namespace student_registration.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("student_registration.Models.ApplicationUser", null)
+                    b.HasOne("SchoolManagement.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -299,7 +300,7 @@ namespace student_registration.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("student_registration.Models.ApplicationUser", null)
+                    b.HasOne("SchoolManagement.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -314,7 +315,7 @@ namespace student_registration.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("student_registration.Models.ApplicationUser", null)
+                    b.HasOne("SchoolManagement.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -323,23 +324,23 @@ namespace student_registration.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("student_registration.Models.ApplicationUser", null)
+                    b.HasOne("SchoolManagement.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("student_registration.Models.Student", b =>
+            modelBuilder.Entity("SchoolManagement.Models.Student", b =>
                 {
-                    b.HasOne("student_registration.Models.Department", "Department")
+                    b.HasOne("SchoolManagement.Models.Department", "Department")
                         .WithMany("Students")
                         .HasForeignKey("Dno");
 
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("student_registration.Models.Department", b =>
+            modelBuilder.Entity("SchoolManagement.Models.Department", b =>
                 {
                     b.Navigation("Students");
                 });

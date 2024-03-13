@@ -1,0 +1,9 @@
+E:\Development\asp.net\student-registration\student-registration\obj\Debug\net7.0\SchoolManagement.csproj.AssemblyReference.cache
+E:\Development\asp.net\student-registration\student-registration\obj\Debug\net7.0\SchoolManagement.GeneratedMSBuildEditorConfig.editorconfig
+E:\Development\asp.net\student-registration\student-registration\obj\Debug\net7.0\SchoolManagement.AssemblyInfoInputs.cache
+E:\Development\asp.net\student-registration\student-registration\obj\Debug\net7.0\SchoolManagement.AssemblyInfo.cs
+E:\Development\asp.net\student-registration\student-registration\obj\Debug\net7.0\SchoolManagement.csproj.CoreCompileInputs.cache
+E:\Development\asp.net\student-registration\student-registration\obj\Debug\net7.0\SchoolManagement.MvcApplicationPartsAssemblyInfo.cache
+E:\Development\asp.net\student-registration\student-registration\obj\Debug\net7.0\SchoolManagement.RazorAssemblyInfo.cache
+E:\Development\asp.net\student-registration\student-registration\obj\Debug\net7.0\SchoolManagement.RazorAssemblyInfo.cs
+E:\Development\asp.net\student-registration\student-registration\obj\Debug\net7.0\SchoolManagement.sourcelink.json

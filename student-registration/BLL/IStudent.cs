@@ -1,7 +1,7 @@
-﻿using student_registration.Models;
+﻿using SchoolManagement.Models;
 using System.Collections.Generic;
 
-namespace student_registration.BLL
+namespace SchoolManagement.BLL
 {
     public interface IStudent
     {

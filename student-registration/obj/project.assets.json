@@ -11489,9 +11489,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Development\\asp.net\\student-registration\\student-registration\\student-registration.csproj",
-      "projectName": "student-registration",
-      "projectPath": "E:\\Development\\asp.net\\student-registration\\student-registration\\student-registration.csproj",
+      "projectUniqueName": "E:\\Development\\asp.net\\student-registration\\student-registration\\SchoolManagement.csproj",
+      "projectName": "SchoolManagement",
+      "projectPath": "E:\\Development\\asp.net\\student-registration\\student-registration\\SchoolManagement.csproj",
       "packagesPath": "C:\\Users\\1heykal\\.nuget\\packages\\",
       "outputPath": "E:\\Development\\asp.net\\student-registration\\student-registration\\obj\\",
       "projectStyle": "PackageReference",
@@ -11521,6 +11521,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -11581,7 +11586,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }

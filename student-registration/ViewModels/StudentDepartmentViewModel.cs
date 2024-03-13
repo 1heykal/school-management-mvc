@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using student_registration.Models;
+using SchoolManagement.Models;
 
-namespace student_registration.ViewModels
+namespace SchoolManagement.ViewModels
 {
     public class StudentDepartmentViewModel
     {

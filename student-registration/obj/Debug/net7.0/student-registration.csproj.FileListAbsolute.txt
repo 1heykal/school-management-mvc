@@ -67,7 +67,6 @@ E:\Development\asp.net\student-registration\student-registration\obj\Debug\net7.
 E:\Development\asp.net\student-registration\student-registration\obj\Debug\net7.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 E:\Development\asp.net\student-registration\student-registration\obj\Debug\net7.0\scopedcss\bundle\student-registration.styles.css
 E:\Development\asp.net\student-registration\student-registration\obj\Debug\net7.0\scopedcss\projectbundle\student-registration.bundle.scp.css
-E:\Development\asp.net\student-registration\student-registration\obj\Debug\net7.0\student-registration.csproj.CopyComplete
 E:\Development\asp.net\student-registration\student-registration\obj\Debug\net7.0\student-registration.dll
 E:\Development\asp.net\student-registration\student-registration\obj\Debug\net7.0\refint\student-registration.dll
 E:\Development\asp.net\student-registration\student-registration\obj\Debug\net7.0\student-registration.pdb
@@ -260,3 +259,5 @@ E:\Development\asp.net\student-registration\student-registration\bin\Debug\net7.
 E:\Development\asp.net\student-registration\student-registration\bin\Debug\net7.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 E:\Development\asp.net\student-registration\student-registration\bin\Debug\net7.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 E:\Development\asp.net\student-registration\student-registration\bin\Debug\net7.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\Development\asp.net\student-registration\student-registration\obj\Debug\net7.0\student-registration.sourcelink.json
+E:\Development\asp.net\student-registration\student-registration\obj\Debug\net7.0\student-.D318C149.Up2Date

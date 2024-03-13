@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using student_registration.Models;
-using student_registration.ViewModels;
+using SchoolManagement.Models;
+using SchoolManagement.ViewModels;
 using System.Security.Claims;
 
-namespace student_registration.Controllers
+namespace SchoolManagement.Controllers
 {
     public class AccountController : Controller
     {

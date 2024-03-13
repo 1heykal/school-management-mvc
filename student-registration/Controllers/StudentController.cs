@@ -1,5 +1,5 @@
-﻿using student_registration.BLL;
-using student_registration.Models;
+﻿using SchoolManagement.BLL;
+using SchoolManagement.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,32 +9,34 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 
-namespace student_registration.Controllers
+namespace SchoolManagement.Controllers
 {
     [Authorize]
     public class StudentController : Controller
     {
-        IStudent db;
-        
+        private readonly IStudent _db;
+        private readonly DepartmentBLL _departmentBLL;
 
-        public StudentController(IStudent _db)
+
+        public StudentController(IStudent db, DepartmentBLL departmentBLL)
         {
-            db = _db;
+            _db = db;
+            _departmentBLL = departmentBLL;
         }
 
-       // [Authorize]
+        // [Authorize]
         public IActionResult Details(Student student)
-        {   
-            Student stu = db.GetByID(student.Id);
+        {
+            Student stu = _db.GetByID(student.Id);
             return View(stu);
         }
 
         public IActionResult DisplayEdited()
         {
             int? id = HttpContext.Session.GetInt32("Id");
-            if(id != null)
+            if (id != null)
             {
-                Student stu = db.GetByID(id.Value);
+                Student stu = _db.GetByID(id.Value);
                 return View(stu);
             }
             return Content("No id provided");
@@ -43,22 +45,22 @@ namespace student_registration.Controllers
         public IActionResult DisplayCreated()
         {
             int id = 0;
-            
+
             if (int.TryParse(Request.Cookies["CId"], out id))
             {
-                Student st = db.GetByID(id);
+                Student st = _db.GetByID(id);
                 return View(st);
             }
 
-            
+
             return Content("No id provided");
         }
 
         public IActionResult CheckEmail(string email, int id)
         {
-           List<Student>  result = db.GetAll().Where(s => s.Email == email).ToList();
+            List<Student> result = _db.GetAll().Where(s => s.Email == email).ToList();
 
-            if(result.Count == 0 || (result.Count == 1 && result[0].Id == id))
+            if (result.Count == 0 || (result.Count == 1 && result[0].Id == id))
             {
                 return Json(true);
             }
@@ -72,22 +74,20 @@ namespace student_registration.Controllers
 
             if (ModelState.IsValid)
             {
-                db.Add(student);
+                _db.Add(student);
                 Response.Cookies.Append("CId", student.Id + "");
                 Response.Cookies.Append("CName", student.Name);
                 return RedirectToAction("Index");
             }
 
-            DepartmentBLL depts = new();
-            ViewBag.departments = new SelectList(depts.GetAll(), "Id", "Name");
+            ViewBag.departments = new SelectList(_departmentBLL.GetAll(), "Id", "Name");
             return View();
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            DepartmentBLL depts = new();
-            ViewBag.departments = new SelectList(depts.GetAll(), "Id", "Name");
+            ViewBag.departments = new SelectList(_departmentBLL.GetAll(), "Id", "Name");
             return View();
         }
 
@@ -97,22 +97,20 @@ namespace student_registration.Controllers
 
             if (ModelState.IsValid)
             {
-                db.Edit(student);
+                _db.Edit(student);
                 HttpContext.Session.SetInt32("Id", student.Id);
                 HttpContext.Session.SetString("Name", student.Name);
                 return RedirectToAction("Index");
             }
-            DepartmentBLL depts = new();
-            ViewBag.departments = new SelectList(depts.GetAll(), "Id", "Name");
+            ViewBag.departments = new SelectList(_departmentBLL.GetAll(), "Id", "Name");
             return View(student);
 
 
         }
         public IActionResult Edit(int id)
         {
-            Student st = db.GetByID(id);
-            DepartmentBLL depts = new();
-            ViewBag.departments = new SelectList(depts.GetAll(), "Id", "Name");
+            Student st = _db.GetByID(id);
+            ViewBag.departments = new SelectList(_departmentBLL.GetAll(), "Id", "Name");
             return View(st);
         }
 
@@ -120,20 +118,20 @@ namespace student_registration.Controllers
         public IActionResult Index()
         {
             var s = User.Identity.Name;
-            var model = db.GetAll();
+            var model = _db.GetAll();
             return View(model);
         }
 
         [HttpPost]
         public IActionResult Delete(Student student)
         {
-            db.Delete(student.Id);
+            _db.Delete(student.Id);
             return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int? id)
         {
-            return View(db.GetByID(id.Value));
+            return View(_db.GetByID(id.Value));
         }
 
 

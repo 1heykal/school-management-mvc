@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using student_registration.ViewModels;
+using SchoolManagement.ViewModels;
 
-namespace student_registration.Controllers
+namespace SchoolManagement.Controllers
 {
     [Authorize(Roles = "Admin")] // [Authorize(Roles = "Admin,Student")]
     public class RolesController : Controller
