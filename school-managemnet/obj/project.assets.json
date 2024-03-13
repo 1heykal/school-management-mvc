@@ -11489,11 +11489,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Development\\asp.net\\student-registration\\student-registration\\SchoolManagement.csproj",
+      "projectUniqueName": "E:\\Development\\asp.net\\school-managemnet\\school-managemnet\\SchoolManagement.csproj",
       "projectName": "SchoolManagement",
-      "projectPath": "E:\\Development\\asp.net\\student-registration\\student-registration\\SchoolManagement.csproj",
+      "projectPath": "E:\\Development\\asp.net\\school-managemnet\\school-managemnet\\SchoolManagement.csproj",
       "packagesPath": "C:\\Users\\1heykal\\.nuget\\packages\\",
-      "outputPath": "E:\\Development\\asp.net\\student-registration\\student-registration\\obj\\",
+      "outputPath": "E:\\Development\\asp.net\\school-managemnet\\school-managemnet\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

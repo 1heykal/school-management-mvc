@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "TjCjKK2tEgl7i8DWkoRsbiL3pa9UhpaQtoEOywUznk7U6y3xWf+F1XqOBFN/y21xTMK8iuIh9nG5Y/glfP9+3g==",
+  "dgSpecHash": "7C+t5dAJ/xz5238+fPuSw8IEP+YaxQVAlNx2G79pi7M1vr2dkauXHTkYo5m/UvxhF9Tzfc242aNWrLmfcgXcxg==",
   "success": true,
-  "projectFilePath": "E:\\Development\\asp.net\\student-registration\\student-registration\\SchoolManagement.csproj",
+  "projectFilePath": "E:\\Development\\asp.net\\school-managemnet\\school-managemnet\\SchoolManagement.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\1heykal\\.nuget\\packages\\auth0.aspnetcore.authentication\\1.3.1\\auth0.aspnetcore.authentication.1.3.1.nupkg.sha512",
     "C:\\Users\\1heykal\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
