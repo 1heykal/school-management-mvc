@@ -42,7 +42,7 @@ namespace SchoolManagement.BLL
         public void Delete(int id)
         {
             var dept = GetByID(id);
-            if (!_context.Students.Any(s => s.Dno == id))
+            if (!_context.Students.Any(s => s.DepartemntId == id))
             {
                 _context.Departments.Remove(dept);
                 _context.SaveChanges();

@@ -29,6 +29,7 @@ builder.Services.AddDbContext<SchoolContext>(optionBuilder =>
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<SchoolContext>();
 
+
 builder.Services.AddScoped<IStudent, StudentBLL>();
 builder.Services.AddScoped<IDepartment, DepartmentBLL>();
 

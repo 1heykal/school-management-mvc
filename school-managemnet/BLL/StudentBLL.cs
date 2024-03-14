@@ -18,7 +18,7 @@ namespace SchoolManagement.BLL
 
         public Student GetByID(int Id)
         {
-            return _context.Students.Include(s => s.Department).FirstOrDefault(s => s.Id == Id);
+            return _context.Students.Include(s => s.Department).FirstOrDefault(s => s.SId == Id);
         }
 
         public List<Student> GetAll()

@@ -35,10 +35,13 @@ namespace SchoolManagement.Controllers
             if (ModelState.IsValid)
             {
                 //create account
-                ApplicationUser userModel = new ApplicationUser();
-                userModel.UserName = newUserVM.UserName;
-                userModel.PasswordHash = newUserVM.Password;
-                userModel.Address = newUserVM.Address;
+                ApplicationUser userModel = new ApplicationUser()
+                {
+                    UserName = newUserVM.UserName,
+                    PasswordHash = newUserVM.Password,
+                    Address = newUserVM.Address
+                };
+
 
                 IdentityResult result = await userManager.CreateAsync(userModel, newUserVM.Password);
                 if (result.Succeeded)
@@ -82,14 +85,13 @@ namespace SchoolManagement.Controllers
                     if (found)
                     {
                         //await signInManager.SignInAsync(userModel, UserVM.RememberMe);
-                        List<Claim> Claims = new();
-                        Claims.Add(new("Address", userModel.Address));
-                            
-                            await signInManager.SignInWithClaimsAsync(
-                            userModel,
-                            UserVM.RememberMe,
-                            Claims
-                            );
+                        List<Claim> Claims = [new("Address", userModel.Address)];
+
+                        await signInManager.SignInWithClaimsAsync(
+                        userModel,
+                        UserVM.RememberMe,
+                        Claims
+                        );
                         return RedirectToAction("Index", "Student");
                     }
                 }
@@ -101,26 +103,29 @@ namespace SchoolManagement.Controllers
 
 
         [HttpGet]
-        public IActionResult Register() 
-        { 
-            return View(); 
+        public IActionResult Register()
+        {
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterUserViewModel newUserVM)
         {
-            
+
             if (ModelState.IsValid)
             {
                 //create account
-                ApplicationUser userModel = new ApplicationUser();
-                userModel.UserName = newUserVM.UserName;
-                userModel.PasswordHash = newUserVM.Password;
-                userModel.Address = newUserVM.Address;
+                ApplicationUser userModel = new ApplicationUser()
+                {
+                    UserName = newUserVM.UserName,
+                    PasswordHash = newUserVM.Password,
+                    Address = newUserVM.Address
+                };
 
-                IdentityResult  result = await userManager.CreateAsync(userModel, newUserVM.Password);
-                if(result.Succeeded)
+
+                IdentityResult result = await userManager.CreateAsync(userModel, newUserVM.Password);
+                if (result.Succeeded)
                 {
                     //create cookie
                     await signInManager.SignInAsync(userModel, false);
@@ -128,16 +133,16 @@ namespace SchoolManagement.Controllers
                 }
                 else
                 {
-                    foreach(var item in result.Errors)
+                    foreach (var item in result.Errors)
                     {
                         ModelState.AddModelError("", item.Description);
                     }
                 }
-                
+
             }
             return View(newUserVM);
         }
-        
+
 
 
         public async Task<IActionResult> Logout()
@@ -145,51 +150,6 @@ namespace SchoolManagement.Controllers
             await signInManager.SignOutAsync();
             return RedirectToAction("Login");
         }
-
-        
-        
-
-
-
-
-
-
-
-
-
-
-        #region Auth0.JWT
-        //public async Task Login(string returnUrl = "/")
-        //{
-        //      var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
-        //          .WithRedirectUri (returnUrl)
-        //          .Build();
-
-        //      await HttpContext.ChallengeAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
-        //}
-
-        //  [Authorize]
-        //  public IActionResult Profile() { 
-        //      return View(new 
-        //      {
-        //          Name = User.Identity.Name,
-        //          EmailAddress = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value,
-        //         // ProfileImage = User.Claims.FirstOrDefault(c => c.Type == "picture")?.Value
-        //      });
-        //  }
-
-        //  [Authorize]
-        //  public async Task Logout()
-        //  {
-        //      var authenticationProperties = new LogoutAuthenticationPropertiesBuilder()
-        //          .WithRedirectUri(Url.Action("Index","Home"))
-        //          .Build();
-
-        //      await HttpContext.SignOutAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
-        //      await HttpContext.SignOutAsync( CookieAuthenticationDefaults.AuthenticationScheme);
-        //  }
-        #endregion
-
 
 
     }

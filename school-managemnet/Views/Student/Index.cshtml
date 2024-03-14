@@ -8,15 +8,15 @@
     <a href="/Department/index" class="btn btn-info">Departments</a>
     <table class="table table-hover table-bordered">
         <thead>
-            <tr><th>ID</th> <th>Name</th> <th>Age</th> <th>Email</th> <th>Dept</th> <th>Operations</th></tr>
+        <tr><th>ID</th> <th>Name</th> <th>BirthDate</th> <th>Email</th> <th>Dept</th> <th>Operations</th></tr>
         </thead>
         <tbody>
             @foreach(var s in Model)
             {
                <tr>
                    <td>@s.Id</td>
-                   <td>@s.Name</td>
-                   <td>@s.Age</td>
+                   <td>@s.FirstName</td>
+                <td>@s.BirthDate</td>
                    <td>@s.Email</td>
                    <td>@s.Department?.Name</td>
                    <td>

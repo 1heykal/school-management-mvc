@@ -11,15 +11,22 @@
     <form method="post">
         <table class="table table-hover table-bordered">
             <tr>
-                <label asp-for="Name"> </label>
-                    <input asp-for="Name"/>
-               <span asp-validation-for="Name"></span>
+                <label asp-for="FirstName"> </label>
+            <input asp-for="FirstName" />
+            <span asp-validation-for="FirstName"></span>
             </tr>
         <br />
+
+        <tr>
+            <label asp-for="LastName"> </label>
+            <input asp-for="LastName" />
+            <span asp-validation-for="LastName"></span>
+        </tr>
+        <br />
             <tr>
-                <label asp-for="Age"></label>      
-                    <input asp-for="Age"/>
-                    <span asp-validation-for="Age"></span>
+                <label asp-for="BirthDate"></label>
+            <input  type="date" asp-for="BirthDate" />
+            <span asp-validation-for="BirthDate"></span>
                 
             </tr>
         <br />
@@ -27,25 +34,11 @@
                 <label asp-for="Email"> </label>    
                     <input asp-for="Email"/>
                      <span asp-validation-for="Email"></span>
-
-                
             </tr>
         <br />
             <tr>
-                <label asp-for="Password"></label>       
-                    <input asp-for="Password"/>
-                <span asp-validation-for="Password"></span>
-            </tr>
-        <br />
-            <tr>
-                <label asp-for="CPassword"></label>      
-                    <input asp-for="CPassword"/>
-               <span asp-validation-for="CPassword"></span>
-            </tr>
-        <br />
-            <tr>
-                 <label asp-for="Dno"> </label>
-                  <select asp-for="Dno" asp-items="ViewBag.departments"></select>
+                 <label asp-for="DepartemntId"> </label>
+            <select asp-for="DepartemntId" asp-items="ViewBag.departments"></select>
 
             </tr>
 

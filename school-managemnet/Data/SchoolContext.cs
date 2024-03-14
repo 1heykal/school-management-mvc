@@ -16,6 +16,13 @@ namespace SchoolManagement.Data
 
         public SchoolContext(DbContextOptions options) : base(options) { }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<ApplicationUser>().UseTptMappingStrategy();
+            builder.Entity<Instructor>().Property<decimal>(i => i.Salary).HasPrecision(38, 18);
+            base.OnModelCreating(builder);
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

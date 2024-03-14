@@ -15,10 +15,10 @@ namespace SchoolManagement.Controllers
     public class StudentController : Controller
     {
         private readonly IStudent _db;
-        private readonly DepartmentBLL _departmentBLL;
+        private readonly IDepartment _departmentBLL;
 
 
-        public StudentController(IStudent db, DepartmentBLL departmentBLL)
+        public StudentController(IStudent db, IDepartment departmentBLL)
         {
             _db = db;
             _departmentBLL = departmentBLL;
@@ -27,7 +27,7 @@ namespace SchoolManagement.Controllers
         // [Authorize]
         public IActionResult Details(Student student)
         {
-            Student stu = _db.GetByID(student.Id);
+            Student stu = _db.GetByID(student.SId);
             return View(stu);
         }
 
@@ -44,9 +44,8 @@ namespace SchoolManagement.Controllers
 
         public IActionResult DisplayCreated()
         {
-            int id = 0;
 
-            if (int.TryParse(Request.Cookies["CId"], out id))
+            if (int.TryParse(Request.Cookies["CId"], out int id))
             {
                 Student st = _db.GetByID(id);
                 return View(st);
@@ -60,7 +59,7 @@ namespace SchoolManagement.Controllers
         {
             List<Student> result = _db.GetAll().Where(s => s.Email == email).ToList();
 
-            if (result.Count == 0 || (result.Count == 1 && result[0].Id == id))
+            if (result.Count == 0 || (result.Count == 1 && result[0].SId == id))
             {
                 return Json(true);
             }
@@ -76,7 +75,7 @@ namespace SchoolManagement.Controllers
             {
                 _db.Add(student);
                 Response.Cookies.Append("CId", student.Id + "");
-                Response.Cookies.Append("CName", student.Name);
+                Response.Cookies.Append("CName", student.FirstName);
                 return RedirectToAction("Index");
             }
 
@@ -98,8 +97,8 @@ namespace SchoolManagement.Controllers
             if (ModelState.IsValid)
             {
                 _db.Edit(student);
-                HttpContext.Session.SetInt32("Id", student.Id);
-                HttpContext.Session.SetString("Name", student.Name);
+                HttpContext.Session.SetInt32("Id", student.SId);
+                HttpContext.Session.SetString("Name", student.FirstName);
                 return RedirectToAction("Index");
             }
             ViewBag.departments = new SelectList(_departmentBLL.GetAll(), "Id", "Name");
@@ -125,7 +124,7 @@ namespace SchoolManagement.Controllers
         [HttpPost]
         public IActionResult Delete(Student student)
         {
-            _db.Delete(student.Id);
+            _db.Delete(student.SId);
             return RedirectToAction("Index");
         }
 

@@ -18,6 +18,7 @@ namespace SchoolManagement.Models
         [Required]
         public string Name { get; set; }
 
-       public ICollection<Student> Students { get; set; }
+        public ICollection<Student> Students { get; set; }
+        public ICollection<Instructor> Instructors { get; set; }
     }
 }
