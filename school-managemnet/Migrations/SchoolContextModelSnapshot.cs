@@ -34,7 +34,7 @@ namespace student_registration.Migrations
 
                     b.HasIndex("InstructorsId");
 
-                    b.ToTable("CourseInstructor");
+                    b.ToTable("CourseInstructor", (string)null);
                 });
 
             modelBuilder.Entity("CourseStudent", b =>
@@ -49,7 +49,7 @@ namespace student_registration.Migrations
 
                     b.HasIndex("StudentsId");
 
-                    b.ToTable("CourseStudent");
+                    b.ToTable("CourseStudent", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -286,7 +286,7 @@ namespace student_registration.Migrations
 
                     b.HasIndex("LabId");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Courses", (string)null);
                 });
 
             modelBuilder.Entity("SchoolManagement.Models.Department", b =>
@@ -308,7 +308,7 @@ namespace student_registration.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", (string)null);
                 });
 
             modelBuilder.Entity("SchoolManagement.Models.Lab", b =>
@@ -327,7 +327,7 @@ namespace student_registration.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Labs");
+                    b.ToTable("Labs", (string)null);
                 });
 
             modelBuilder.Entity("SchoolManagement.Models.Instructor", b =>
@@ -355,7 +355,7 @@ namespace student_registration.Migrations
 
                     b.HasIndex("DepartemntId");
 
-                    b.ToTable("Instructors");
+                    b.ToTable("Instructors", (string)null);
                 });
 
             modelBuilder.Entity("SchoolManagement.Models.Student", b =>
@@ -373,7 +373,7 @@ namespace student_registration.Migrations
 
                     b.HasIndex("DepartemntId");
 
-                    b.ToTable("Students");
+                    b.ToTable("Students", (string)null);
                 });
 
             modelBuilder.Entity("CourseInstructor", b =>

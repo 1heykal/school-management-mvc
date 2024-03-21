@@ -1,12 +1,7 @@
 ﻿using SchoolManagement.BLL;
 using SchoolManagement.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 
 namespace SchoolManagement.Controllers
@@ -27,16 +22,16 @@ namespace SchoolManagement.Controllers
         // [Authorize]
         public IActionResult Details(Student student)
         {
-            Student stu = _db.GetByID(student.SId);
+            Student stu = _db.GetByID(student.Id);
             return View(stu);
         }
 
         public IActionResult DisplayEdited()
         {
-            int? id = HttpContext.Session.GetInt32("Id");
+            string id = HttpContext.Session.GetString("Id");
             if (id != null)
             {
-                Student stu = _db.GetByID(id.Value);
+                Student stu = _db.GetByID(id);
                 return View(stu);
             }
             return Content("No id provided");
@@ -45,7 +40,7 @@ namespace SchoolManagement.Controllers
         public IActionResult DisplayCreated()
         {
 
-            if (int.TryParse(Request.Cookies["CId"], out int id))
+            if (Request.Cookies["CId"] is string id)
             {
                 Student st = _db.GetByID(id);
                 return View(st);
@@ -97,7 +92,7 @@ namespace SchoolManagement.Controllers
             if (ModelState.IsValid)
             {
                 _db.Edit(student);
-                HttpContext.Session.SetInt32("Id", student.SId);
+                HttpContext.Session.SetString("Id", student.Id);
                 HttpContext.Session.SetString("Name", student.FirstName);
                 return RedirectToAction("Index");
             }
@@ -106,7 +101,7 @@ namespace SchoolManagement.Controllers
 
 
         }
-        public IActionResult Edit(int id)
+        public IActionResult Edit(string id)
         {
             Student st = _db.GetByID(id);
             ViewBag.departments = new SelectList(_departmentBLL.GetAll(), "Id", "Name");
@@ -124,13 +119,13 @@ namespace SchoolManagement.Controllers
         [HttpPost]
         public IActionResult Delete(Student student)
         {
-            _db.Delete(student.SId);
+            _db.Delete(student.Id);
             return RedirectToAction("Index");
         }
 
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(string id)
         {
-            return View(_db.GetByID(id.Value));
+            return View(_db.GetByID(id));
         }
 
 

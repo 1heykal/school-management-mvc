@@ -5,7 +5,7 @@ namespace SchoolManagement.BLL
 {
     public interface IStudent
     {
-        public Student GetByID(int Id);
+        public Student GetByID(string Id);
 
 
         public List<Student> GetAll();
@@ -17,7 +17,7 @@ namespace SchoolManagement.BLL
         public Student Edit(Student student);
 
 
-        public void Delete(int id);
-       
+        public void Delete(string id);
+
     }
 }

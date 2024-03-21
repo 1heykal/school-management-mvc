@@ -16,9 +16,9 @@ namespace SchoolManagement.BLL
             _context = context;
         }
 
-        public Student GetByID(int Id)
+        public Student GetByID(string Id)
         {
-            return _context.Students.Include(s => s.Department).FirstOrDefault(s => s.SId == Id);
+            return _context.Students.Include(s => s.Department).FirstOrDefault(s => s.Id == Id);
         }
 
         public List<Student> GetAll()
@@ -40,7 +40,7 @@ namespace SchoolManagement.BLL
             return student;
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             var student = GetByID(id);
             _context.Students.Remove(student);

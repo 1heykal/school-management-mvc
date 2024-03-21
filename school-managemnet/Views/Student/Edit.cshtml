@@ -11,7 +11,8 @@
             <tr>
 
             <input hidden asp-for="Id" value="@Model.Id"/>
-                    
+@*             <input hidden asp-for="SId" value="@Model.SId" />
+ *@
             </tr>
             <br />
             <tr>
@@ -30,7 +31,7 @@
         <br />
             <tr>
                 <label asp-for="BirthDate"></label>
-            <input asp-for="BirthDate" value="@Model.BirthDate" />
+            <input type="date" asp-for="BirthDate" value="@Model.BirthDate" />
             <span asp-validation-for="BirthDate"></span>
             </tr>
         <br />
