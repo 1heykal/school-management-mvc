@@ -1896,7 +1896,7 @@ class Collapse extends BaseComponent {
 
 
 EventHandler.on(document, EVENT_CLICK_DATA_API$4, SELECTOR_DATA_TOGGLE$4, function (event) {
-  // preventDefault only for <a> elements (which change the URL) not inside the collapsible element
+  // preventDefault only for <a> elements (which change the URL) not inSIde the collapsible element
   if (event.target.tagName === 'A' || event.delegateTarget && event.delegateTarget.tagName === 'A') {
     event.preventDefault();
   }
@@ -2285,7 +2285,7 @@ class Dropdown extends BaseComponent {
         const composedPath = event.composedPath();
         const isMenuTarget = composedPath.includes(context._menu);
 
-        if (composedPath.includes(context._element) || context._config.autoClose === 'inside' && !isMenuTarget || context._config.autoClose === 'outside' && isMenuTarget) {
+        if (composedPath.includes(context._element) || context._config.autoClose === 'inSIde' && !isMenuTarget || context._config.autoClose === 'outSIde' && isMenuTarget) {
           continue;
         } // Tab navigation through the dropdown menu or events from contained inputs shouldn't close the menu
 
@@ -2314,7 +2314,7 @@ class Dropdown extends BaseComponent {
     //  - If space key => not a dropdown command
     //  - If key is other than escape
     //    - If key is not up or down => not a dropdown command
-    //    - If trigger inside the menu => not a dropdown command
+    //    - If trigger inSIde the menu => not a dropdown command
     if (/input|textarea/i.test(event.target.tagName) ? event.key === SPACE_KEY || event.key !== ESCAPE_KEY$2 && (event.key !== ARROW_DOWN_KEY && event.key !== ARROW_UP_KEY || event.target.closest(SELECTOR_MENU)) : !REGEXP_KEYDOWN.test(event.key)) {
       return;
     }
@@ -2616,7 +2616,7 @@ class Backdrop {
  */
 const Default$6 = {
   trapElement: null,
-  // The element to trap focus inside of
+  // The element to trap focus inSIde of
   autofocus: true
 };
 const DefaultType$6 = {
@@ -4491,7 +4491,7 @@ class ScrollSpy extends BaseComponent {
       SelectorEngine.parents(link, SELECTOR_NAV_LIST_GROUP$1).forEach(listGroup => {
         // Set triggered links parents as active
         // With both <ul> and <nav> markup a parent is the previous sibling of any nav ancestor
-        SelectorEngine.prev(listGroup, `${SELECTOR_NAV_LINKS}, ${SELECTOR_LIST_ITEMS}`).forEach(item => item.classList.add(CLASS_NAME_ACTIVE$1)); // Handle special case when .nav-link is inside .nav-item
+        SelectorEngine.prev(listGroup, `${SELECTOR_NAV_LINKS}, ${SELECTOR_LIST_ITEMS}`).forEach(item => item.classList.add(CLASS_NAME_ACTIVE$1)); // Handle special case when .nav-link is inSIde .nav-item
 
         SelectorEngine.prev(listGroup, SELECTOR_NAV_ITEMS).forEach(navItem => {
           SelectorEngine.children(navItem, SELECTOR_NAV_LINKS).forEach(item => item.classList.add(CLASS_NAME_ACTIVE$1));

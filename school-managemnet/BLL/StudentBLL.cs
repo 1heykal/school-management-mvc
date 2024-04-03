@@ -18,12 +18,12 @@ namespace SchoolManagement.BLL
 
         public Student GetByID(string Id)
         {
-            return _context.Students.Include(s => s.Department).FirstOrDefault(s => s.Id == Id);
+            return _context.Students.FirstOrDefault(s => s.Id == Id);
         }
 
         public List<Student> GetAll()
         {
-            return _context.Students.Include(s => s.Department).ToList();
+            return _context.Students.ToList();
         }
 
         public Student Add(Student student)

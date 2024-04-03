@@ -187,7 +187,7 @@
                 form = $element.parents("form")[0],
                 valInfo, rules, messages;
 
-            if (!form) {  // Cannot do client-side validation without a form
+            if (!form) {  // Cannot do client-SIde validation without a form
                 return;
             }
 

@@ -1,16 +1,19 @@
 ﻿@model Student
 @{
     ViewData["Title"] = "DisplayEdited";
-    Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 
 <h1>Recentely Edited</h1>
 <a href="/Student/index" class="btn btn-info">Students</a>
 <table class="table table-hover table-bordered">
     <thead>
-        <tr><th>ID</th> <th>Name</th> <th>Age</th> <th>Email</th><th>Department</th></tr>
+    <tr>
+        <th>ID</th> <th>Name</th> <th>Age</th> <th>Email</th><th>Department</th>
+    </tr>
     </thead>
     <tbody>
-        <tr> <td>@Model.Id </td><td>@Model.FirstName</td> <td>@Model.BirthDate</td> <td>@Model.Email</td> <td>@Model.Department?.Name</td> </tr>
+    <tr>
+        <td>@Model.Id </td><td>@Model.FirstName</td> <td>@Model.BirthDate</td> <td>@Model.Email</td> <td>@Model.EnrollmentDate</td>
+    </tr>
     </tbody>
 </table>

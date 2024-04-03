@@ -231,21 +231,21 @@ namespace student_registration.Migrations
                 name: "CourseInstructor",
                 columns: table => new
                 {
-                    CoursesId = table.Column<int>(type: "int", nullable: false),
-                    InstructorsId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    CourseSId = table.Column<int>(type: "int", nullable: false),
+                    InstructorSId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CourseInstructor", x => new { x.CoursesId, x.InstructorsId });
+                    table.PrimaryKey("PK_CourseInstructor", x => new { x.CourseSId, x.InstructorSId });
                     table.ForeignKey(
-                        name: "FK_CourseInstructor_AspNetUsers_InstructorsId",
-                        column: x => x.InstructorsId,
+                        name: "FK_CourseInstructor_AspNetUsers_InstructorSId",
+                        column: x => x.InstructorSId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CourseInstructor_Courses_CoursesId",
-                        column: x => x.CoursesId,
+                        name: "FK_CourseInstructor_Courses_CourseSId",
+                        column: x => x.CourseSId,
                         principalTable: "Courses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -255,21 +255,21 @@ namespace student_registration.Migrations
                 name: "CourseStudent",
                 columns: table => new
                 {
-                    CoursesId = table.Column<int>(type: "int", nullable: false),
-                    StudentsId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    CourseSId = table.Column<int>(type: "int", nullable: false),
+                    StudentSId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CourseStudent", x => new { x.CoursesId, x.StudentsId });
+                    table.PrimaryKey("PK_CourseStudent", x => new { x.CourseSId, x.StudentSId });
                     table.ForeignKey(
-                        name: "FK_CourseStudent_AspNetUsers_StudentsId",
-                        column: x => x.StudentsId,
+                        name: "FK_CourseStudent_AspNetUsers_StudentSId",
+                        column: x => x.StudentSId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CourseStudent_Courses_CoursesId",
-                        column: x => x.CoursesId,
+                        name: "FK_CourseStudent_Courses_CourseSId",
+                        column: x => x.CourseSId,
                         principalTable: "Courses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -320,9 +320,9 @@ namespace student_registration.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CourseInstructor_InstructorsId",
+                name: "IX_CourseInstructor_InstructorSId",
                 table: "CourseInstructor",
-                column: "InstructorsId");
+                column: "InstructorSId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Courses_LabId",
@@ -330,9 +330,9 @@ namespace student_registration.Migrations
                 column: "LabId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CourseStudent_StudentsId",
+                name: "IX_CourseStudent_StudentSId",
                 table: "CourseStudent",
-                column: "StudentsId");
+                column: "StudentSId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Departments_CourseId",

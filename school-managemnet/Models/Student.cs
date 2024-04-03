@@ -10,15 +10,8 @@ namespace SchoolManagement.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [JsonIgnore]
         public int SId { get; set; }
-
-        [DataType(DataType.EmailAddress)]
-        [Remote("CheckEmail", "Student", AdditionalFields = "Id", ErrorMessage = "Email alraedy exists.")]
-        public override string Email { get; set; }
-        public ICollection<Course> Courses { get; set; }
-
-        public int DepartemntId { get; set; }
-
-        [ForeignKey(nameof(DepartemntId))]
-        public Department Department { get; set; }
+        public DateTime EnrollmentDate { get; set; }
+        
+        public ICollection<Enrollment> Enrollments { get; init; }
     }
 }

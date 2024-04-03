@@ -17,24 +17,24 @@ namespace SchoolManagement.BLL
 
         public Department GetByID(int Id)
         {
-            return _context.Departments.Find(Id);
+            return null; //_context.Departments.Find(Id);
         }
 
         public List<Department> GetAll()
         {
-            return _context.Departments.ToList();
+            return null; //  _context.Departments.ToList();
         }
 
         public Department Add(Department department)
         {
-            _context.Departments.Add(department);
+         //   _context.Departments.Add(department);
             _context.SaveChanges();
             return department;
         }
 
         public Department Edit(Department department)
         {
-            _context.Departments.Update(department);
+           // _context.Departments.Update(department);
             _context.SaveChanges();
             return department;
         }
@@ -42,11 +42,9 @@ namespace SchoolManagement.BLL
         public void Delete(int id)
         {
             var dept = GetByID(id);
-            if (!_context.Students.Any(s => s.DepartemntId == id))
-            {
-                _context.Departments.Remove(dept);
-                _context.SaveChanges();
-            }
+         //   _context.Departments.Remove(dept);
+            _context.SaveChanges();
+            
 
 
 

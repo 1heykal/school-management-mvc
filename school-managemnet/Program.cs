@@ -1,14 +1,8 @@
-using Auth0.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Logging;
-using Microsoft.IdentityModel.Tokens;
 using SchoolManagement.BLL;
 using SchoolManagement.Data;
 using SchoolManagement.Models;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +12,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddSession();
 
-string connectionString = builder.Configuration.GetConnectionString("CS");
+string connectionString = builder.Configuration.GetConnectionString("SchoolContext");
 
 builder.Services.AddDbContext<SchoolContext>(optionBuilder =>
 {
@@ -33,6 +27,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 builder.Services.AddScoped<IStudent, StudentBLL>();
 builder.Services.AddScoped<IDepartment, DepartmentBLL>();
 
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 var app = builder.Build();
 
@@ -41,6 +36,19 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
+}
+else
+{
+    app.UseDeveloperExceptionPage();
+    app.UseMigrationsEndPoint();
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<SchoolContext>();
+    context.Database.EnsureCreated();
+    DbInitializer.Initialize(context);
 }
 
 app.UseHttpsRedirection();

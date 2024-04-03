@@ -27,30 +27,30 @@ namespace student_registration.Migrations
 
             modelBuilder.Entity("CourseInstructor", b =>
                 {
-                    b.Property<int>("CoursesId")
+                    b.Property<int>("CourseSId")
                         .HasColumnType("int");
 
-                    b.Property<string>("InstructorsId")
+                    b.Property<string>("InstructorSId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("CoursesId", "InstructorsId");
+                    b.HasKey("CourseSId", "InstructorSId");
 
-                    b.HasIndex("InstructorsId");
+                    b.HasIndex("InstructorSId");
 
                     b.ToTable("CourseInstructor");
                 });
 
             modelBuilder.Entity("CourseStudent", b =>
                 {
-                    b.Property<int>("CoursesId")
+                    b.Property<int>("CourseSId")
                         .HasColumnType("int");
 
-                    b.Property<string>("StudentsId")
+                    b.Property<string>("StudentSId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("CoursesId", "StudentsId");
+                    b.HasKey("CourseSId", "StudentSId");
 
-                    b.HasIndex("StudentsId");
+                    b.HasIndex("StudentSId");
 
                     b.ToTable("CourseStudent");
                 });
@@ -383,13 +383,13 @@ namespace student_registration.Migrations
                 {
                     b.HasOne("SchoolManagement.Models.Course", null)
                         .WithMany()
-                        .HasForeignKey("CoursesId")
+                        .HasForeignKey("CourseSId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("SchoolManagement.Models.Instructor", null)
                         .WithMany()
-                        .HasForeignKey("InstructorsId")
+                        .HasForeignKey("InstructorSId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -398,13 +398,13 @@ namespace student_registration.Migrations
                 {
                     b.HasOne("SchoolManagement.Models.Course", null)
                         .WithMany()
-                        .HasForeignKey("CoursesId")
+                        .HasForeignKey("CourseSId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("SchoolManagement.Models.Student", null)
                         .WithMany()
-                        .HasForeignKey("StudentsId")
+                        .HasForeignKey("StudentSId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

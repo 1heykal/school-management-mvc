@@ -16,11 +16,11 @@ namespace student_registration.Migrations
                 table: "AspNetUsers");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_CourseInstructor_AspNetUsers_InstructorsId",
+                name: "FK_CourseInstructor_AspNetUsers_InstructorSId",
                 table: "CourseInstructor");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_CourseStudent_AspNetUsers_StudentsId",
+                name: "FK_CourseStudent_AspNetUsers_StudentSId",
                 table: "CourseStudent");
 
             migrationBuilder.DropIndex(
@@ -121,17 +121,17 @@ namespace student_registration.Migrations
                 column: "DepartemntId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_CourseInstructor_Instructors_InstructorsId",
+                name: "FK_CourseInstructor_Instructors_InstructorSId",
                 table: "CourseInstructor",
-                column: "InstructorsId",
+                column: "InstructorSId",
                 principalTable: "Instructors",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_CourseStudent_Students_StudentsId",
+                name: "FK_CourseStudent_Students_StudentSId",
                 table: "CourseStudent",
-                column: "StudentsId",
+                column: "StudentSId",
                 principalTable: "Students",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
@@ -141,11 +141,11 @@ namespace student_registration.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_CourseInstructor_Instructors_InstructorsId",
+                name: "FK_CourseInstructor_Instructors_InstructorSId",
                 table: "CourseInstructor");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_CourseStudent_Students_StudentsId",
+                name: "FK_CourseStudent_Students_StudentSId",
                 table: "CourseStudent");
 
             migrationBuilder.DropTable(
@@ -215,17 +215,17 @@ namespace student_registration.Migrations
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_CourseInstructor_AspNetUsers_InstructorsId",
+                name: "FK_CourseInstructor_AspNetUsers_InstructorSId",
                 table: "CourseInstructor",
-                column: "InstructorsId",
+                column: "InstructorSId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_CourseStudent_AspNetUsers_StudentsId",
+                name: "FK_CourseStudent_AspNetUsers_StudentSId",
                 table: "CourseStudent",
-                column: "StudentsId",
+                column: "StudentSId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);

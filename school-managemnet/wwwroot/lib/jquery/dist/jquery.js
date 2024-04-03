@@ -682,7 +682,7 @@ var i,
 
 			// Replace a hexadecimal escape sequence with the encoded Unicode code point
 			// Support: IE <=11+
-			// For values outside the Basic Multilingual Plane (BMP), manually construct a
+			// For values outSIde the Basic Multilingual Plane (BMP), manually construct a
 			// surrogate pair
 			high < 0 ?
 				String.fromCharCode( high + 0x10000 ) :
@@ -842,7 +842,7 @@ function Sizzle( selector, context, results, seed ) {
 				newSelector = selector;
 				newContext = context;
 
-				// qSA considers elements outside a scoping root when evaluating child or
+				// qSA conSIders elements outSIde a scoping root when evaluating child or
 				// descendant combinators, which is not what we want.
 				// In such cases, we work around the behavior by prefixing every selector in the
 				// list with an ID selector referencing the scope context.
@@ -1116,7 +1116,7 @@ isXML = Sizzle.isXML = function( elem ) {
 		docElem = elem && ( elem.ownerDocument || elem ).documentElement;
 
 	// Support: IE <=8
-	// Assume HTML when documentElement doesn't yet exist, such as inside loading iframes
+	// Assume HTML when documentElement doesn't yet exist, such as inSIde loading iframes
 	// https://bugs.jquery.com/ticket/4833
 	return !rhtml.test( namespace || docElem && docElem.nodeName || "HTML" );
 };
@@ -4932,7 +4932,7 @@ var rscriptType = ( /^$|^module$|\/(?:java|ecma)script/i );
 	support.noCloneChecked = !!div.cloneNode( true ).lastChild.defaultValue;
 
 	// Support: IE <=9 only
-	// IE <=9 replaces <option> tags with their contents when inserted outside of
+	// IE <=9 replaces <option> tags with their contents when inserted outSIde of
 	// the select element.
 	div.innerHTML = "<option></option>";
 	support.option = !!div.lastChild;
@@ -5583,7 +5583,7 @@ jQuery.event = {
 			},
 
 			// For cross-browser consistency, suppress native .click() on links
-			// Also prevent it if we're currently inside a leveraged native-event stack
+			// Also prevent it if we're currently inSIde a leveraged native-event stack
 			_default: function( event ) {
 				var target = event.target;
 				return rcheckableType.test( target.type ) &&
@@ -5660,7 +5660,7 @@ function leverageNative( el, type, expectSync ) {
 
 						// Support: Chrome 86+
 						// In Chrome, if an element having a focusout handler is blurred by
-						// clicking outside of it, it invokes the handler synchronously. If
+						// clicking outSIde of it, it invokes the handler synchronously. If
 						// that handler calls `.remove()` on the element, the data is cleared,
 						// leaving `result` undefined. We need to guard against this.
 						return result && result.value;
@@ -5888,7 +5888,7 @@ jQuery.each( {
 				related = event.relatedTarget,
 				handleObj = event.handleObj;
 
-			// For mouseenter/leave call the handler if related is outside the target.
+			// For mouseenter/leave call the handler if related is outSIde the target.
 			// NB: No relatedTarget if the mouse left/entered the browser window
 			if ( !related || ( related !== target && !jQuery.contains( target, related ) ) ) {
 				event.type = handleObj.origType;
@@ -8202,7 +8202,7 @@ jQuery.extend( {
 // The getter ensures a default option is selected
 // when in an optgroup
 // eslint rule "no-unused-expressions" is disabled for this code
-// since it considers such accessions noop
+// since it conSIders such accessions noop
 if ( !support.optSelected ) {
 	jQuery.propHooks.selected = {
 		get: function( elem ) {
@@ -8679,7 +8679,7 @@ jQuery.extend( jQuery.event, {
 			[ event ] :
 			jQuery.makeArray( data, [ event ] );
 
-		// Allow special events to draw outside the lines
+		// Allow special events to draw outSIde the lines
 		special = jQuery.event.special[ type ] || {};
 		if ( !onlyHandlers && special.trigger && special.trigger.apply( elem, data ) === false ) {
 			return;
@@ -9559,7 +9559,7 @@ jQuery.extend( {
 		// Apply prefilters
 		inspectPrefiltersOrTransports( prefilters, s, options, jqXHR );
 
-		// If request was aborted inside a prefilter, stop there
+		// If request was aborted inSIde a prefilter, stop there
 		if ( completed ) {
 			return jqXHR;
 		}
@@ -9673,7 +9673,7 @@ jQuery.extend( {
 				globalEventContext.trigger( "ajaxSend", [ jqXHR, s ] );
 			}
 
-			// If request was aborted inside ajaxSend, stop there
+			// If request was aborted inSIde ajaxSend, stop there
 			if ( completed ) {
 				return jqXHR;
 			}
@@ -10551,7 +10551,7 @@ jQuery.fn.extend( {
 			}
 			if ( offsetParent && offsetParent !== elem && offsetParent.nodeType === 1 ) {
 
-				// Incorporate borders into its offset, since they are outside its content origin
+				// Incorporate borders into its offset, since they are outSIde its content origin
 				parentOffset = jQuery( offsetParent ).offset();
 				parentOffset.top += jQuery.css( offsetParent, "borderTopWidth", true );
 				parentOffset.left += jQuery.css( offsetParent, "borderLeftWidth", true );
@@ -10566,13 +10566,13 @@ jQuery.fn.extend( {
 	},
 
 	// This method will return documentElement in the following cases:
-	// 1) For the element inside the iframe without offsetParent, this method will return
+	// 1) For the element inSIde the iframe without offsetParent, this method will return
 	//    documentElement of the parent window
 	// 2) For the hidden or detached element
 	// 3) For body or html element, i.e. in case of the html node - it will return itself
 	//
 	// but those exceptions were never presented as a real life use-cases
-	// and might be considered as more preferable results.
+	// and might be conSIdered as more preferable results.
 	//
 	// This logic, however, is not guaranteed and can change at any point in the future
 	offsetParent: function() {

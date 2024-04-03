@@ -1900,7 +1900,7 @@
 
 
   EventHandler.on(document, EVENT_CLICK_DATA_API$4, SELECTOR_DATA_TOGGLE$4, function (event) {
-    // preventDefault only for <a> elements (which change the URL) not inside the collapsible element
+    // preventDefault only for <a> elements (which change the URL) not inSIde the collapsible element
     if (event.target.tagName === 'A' || event.delegateTarget && event.delegateTarget.tagName === 'A') {
       event.preventDefault();
     }
@@ -2255,7 +2255,7 @@
     return max(min$1, min(value, max$1));
   }
 
-  function getFreshSideObject() {
+  function getFreshSIdeObject() {
     return {
       top: 0,
       right: 0,
@@ -2265,7 +2265,7 @@
   }
 
   function mergePaddingObject(paddingObject) {
-    return Object.assign({}, getFreshSideObject(), paddingObject);
+    return Object.assign({}, getFreshSIdeObject(), paddingObject);
   }
 
   function expandToHashMap(value, keys) {
@@ -2308,7 +2308,7 @@
     var arrowOffsetParent = getOffsetParent(arrowElement);
     var clientSize = arrowOffsetParent ? axis === 'y' ? arrowOffsetParent.clientHeight || 0 : arrowOffsetParent.clientWidth || 0 : 0;
     var centerToReference = endDiff / 2 - startDiff / 2; // Make sure the arrow doesn't overflow the popper if the center point is
-    // outside of the popper bounds
+    // outSIde of the popper bounds
 
     var min = paddingObject[minProp];
     var max = clientSize - arrowRect[len] - paddingObject[maxProp];
@@ -2357,7 +2357,7 @@
     requiresIfExists: ['preventOverflow']
   };
 
-  var unsetSides = {
+  var unsetSIdes = {
     top: 'auto',
     right: 'auto',
     bottom: 'auto',
@@ -2397,8 +2397,8 @@
 
     var hasX = offsets.hasOwnProperty('x');
     var hasY = offsets.hasOwnProperty('y');
-    var sideX = left;
-    var sideY = top;
+    var SIdeX = left;
+    var SIdeY = top;
     var win = window;
 
     if (adaptive) {
@@ -2419,14 +2419,14 @@
       offsetParent = offsetParent;
 
       if (placement === top) {
-        sideY = bottom; // $FlowFixMe[prop-missing]
+        SIdeY = bottom; // $FlowFixMe[prop-missing]
 
         y -= offsetParent[heightProp] - popperRect.height;
         y *= gpuAcceleration ? 1 : -1;
       }
 
       if (placement === left) {
-        sideX = right; // $FlowFixMe[prop-missing]
+        SIdeX = right; // $FlowFixMe[prop-missing]
 
         x -= offsetParent[widthProp] - popperRect.width;
         x *= gpuAcceleration ? 1 : -1;
@@ -2435,15 +2435,15 @@
 
     var commonStyles = Object.assign({
       position: position
-    }, adaptive && unsetSides);
+    }, adaptive && unsetSIdes);
 
     if (gpuAcceleration) {
       var _Object$assign;
 
-      return Object.assign({}, commonStyles, (_Object$assign = {}, _Object$assign[sideY] = hasY ? '0' : '', _Object$assign[sideX] = hasX ? '0' : '', _Object$assign.transform = (win.devicePixelRatio || 1) < 2 ? "translate(" + x + "px, " + y + "px)" : "translate3d(" + x + "px, " + y + "px, 0)", _Object$assign));
+      return Object.assign({}, commonStyles, (_Object$assign = {}, _Object$assign[SIdeY] = hasY ? '0' : '', _Object$assign[SIdeX] = hasX ? '0' : '', _Object$assign.transform = (win.devicePixelRatio || 1) < 2 ? "translate(" + x + "px, " + y + "px)" : "translate3d(" + x + "px, " + y + "px, 0)", _Object$assign));
     }
 
-    return Object.assign({}, commonStyles, (_Object$assign2 = {}, _Object$assign2[sideY] = hasY ? y + "px" : '', _Object$assign2[sideX] = hasX ? x + "px" : '', _Object$assign2.transform = '', _Object$assign2));
+    return Object.assign({}, commonStyles, (_Object$assign2 = {}, _Object$assign2[SIdeY] = hasY ? y + "px" : '', _Object$assign2[SIdeX] = hasX ? x + "px" : '', _Object$assign2.transform = '', _Object$assign2));
   }
 
   function computeStyles(_ref4) {
@@ -2989,13 +2989,13 @@
         altBoundary: altBoundary,
         padding: padding
       });
-      var mainVariationSide = isVertical ? isStartVariation ? right : left : isStartVariation ? bottom : top;
+      var mainVariationSIde = isVertical ? isStartVariation ? right : left : isStartVariation ? bottom : top;
 
       if (referenceRect[len] > popperRect[len]) {
-        mainVariationSide = getOppositePlacement(mainVariationSide);
+        mainVariationSIde = getOppositePlacement(mainVariationSIde);
       }
 
-      var altVariationSide = getOppositePlacement(mainVariationSide);
+      var altVariationSIde = getOppositePlacement(mainVariationSIde);
       var checks = [];
 
       if (checkMainAxis) {
@@ -3003,7 +3003,7 @@
       }
 
       if (checkAltAxis) {
-        checks.push(overflow[mainVariationSide] <= 0, overflow[altVariationSide] <= 0);
+        checks.push(overflow[mainVariationSIde] <= 0, overflow[altVariationSIde] <= 0);
       }
 
       if (checks.every(function (check) {
@@ -3064,7 +3064,7 @@
     }
   };
 
-  function getSideOffsets(overflow, rect, preventedOffsets) {
+  function getSIdeOffsets(overflow, rect, preventedOffsets) {
     if (preventedOffsets === void 0) {
       preventedOffsets = {
         x: 0,
@@ -3080,9 +3080,9 @@
     };
   }
 
-  function isAnySideFullyClipped(overflow) {
-    return [top, right, bottom, left].some(function (side) {
-      return overflow[side] >= 0;
+  function isAnySIdeFullyClipped(overflow) {
+    return [top, right, bottom, left].some(function (SIde) {
+      return overflow[SIde] >= 0;
     });
   }
 
@@ -3098,10 +3098,10 @@
     var popperAltOverflow = detectOverflow(state, {
       altBoundary: true
     });
-    var referenceClippingOffsets = getSideOffsets(referenceOverflow, referenceRect);
-    var popperEscapeOffsets = getSideOffsets(popperAltOverflow, popperRect, preventedOffsets);
-    var isReferenceHidden = isAnySideFullyClipped(referenceClippingOffsets);
-    var hasPopperEscaped = isAnySideFullyClipped(popperEscapeOffsets);
+    var referenceClippingOffsets = getSIdeOffsets(referenceOverflow, referenceRect);
+    var popperEscapeOffsets = getSIdeOffsets(popperAltOverflow, popperRect, preventedOffsets);
+    var isReferenceHidden = isAnySIdeFullyClipped(referenceClippingOffsets);
+    var hasPopperEscaped = isAnySIdeFullyClipped(popperEscapeOffsets);
     state.modifiersData[name] = {
       referenceClippingOffsets: referenceClippingOffsets,
       popperEscapeOffsets: popperEscapeOffsets,
@@ -3246,25 +3246,25 @@
     }
 
     if (checkMainAxis || checkAltAxis) {
-      var mainSide = mainAxis === 'y' ? top : left;
-      var altSide = mainAxis === 'y' ? bottom : right;
+      var mainSIde = mainAxis === 'y' ? top : left;
+      var altSIde = mainAxis === 'y' ? bottom : right;
       var len = mainAxis === 'y' ? 'height' : 'width';
       var offset = popperOffsets[mainAxis];
-      var min$1 = popperOffsets[mainAxis] + overflow[mainSide];
-      var max$1 = popperOffsets[mainAxis] - overflow[altSide];
+      var min$1 = popperOffsets[mainAxis] + overflow[mainSIde];
+      var max$1 = popperOffsets[mainAxis] - overflow[altSIde];
       var additive = tether ? -popperRect[len] / 2 : 0;
       var minLen = variation === start ? referenceRect[len] : popperRect[len];
       var maxLen = variation === start ? -popperRect[len] : -referenceRect[len]; // We need to include the arrow in the calculation so the arrow doesn't go
-      // outside the reference bounds
+      // outSIde the reference bounds
 
       var arrowElement = state.elements.arrow;
       var arrowRect = tether && arrowElement ? getLayoutRect(arrowElement) : {
         width: 0,
         height: 0
       };
-      var arrowPaddingObject = state.modifiersData['arrow#persistent'] ? state.modifiersData['arrow#persistent'].padding : getFreshSideObject();
-      var arrowPaddingMin = arrowPaddingObject[mainSide];
-      var arrowPaddingMax = arrowPaddingObject[altSide]; // If the reference length is smaller than the arrow length, we don't want
+      var arrowPaddingObject = state.modifiersData['arrow#persistent'] ? state.modifiersData['arrow#persistent'].padding : getFreshSIdeObject();
+      var arrowPaddingMin = arrowPaddingObject[mainSIde];
+      var arrowPaddingMax = arrowPaddingObject[altSIde]; // If the reference length is smaller than the arrow length, we don't want
       // to include its full size in the calculation. If the reference is small
       // and near the edge of a boundary, the popper can overflow even if the
       // reference is not overflowing as well (e.g. virtual elements with no
@@ -3286,15 +3286,15 @@
       }
 
       if (checkAltAxis) {
-        var _mainSide = mainAxis === 'x' ? top : left;
+        var _mainSIde = mainAxis === 'x' ? top : left;
 
-        var _altSide = mainAxis === 'x' ? bottom : right;
+        var _altSIde = mainAxis === 'x' ? bottom : right;
 
         var _offset = popperOffsets[altAxis];
 
-        var _min = _offset + overflow[_mainSide];
+        var _min = _offset + overflow[_mainSIde];
 
-        var _max = _offset - overflow[_altSide];
+        var _max = _offset - overflow[_altSIde];
 
         var _preventedOffset = within(tether ? min(_min, tetherMin) : _min, _offset, tether ? max(_max, tetherMax) : _max);
 
@@ -4065,7 +4065,7 @@
           const composedPath = event.composedPath();
           const isMenuTarget = composedPath.includes(context._menu);
 
-          if (composedPath.includes(context._element) || context._config.autoClose === 'inside' && !isMenuTarget || context._config.autoClose === 'outside' && isMenuTarget) {
+          if (composedPath.includes(context._element) || context._config.autoClose === 'inSIde' && !isMenuTarget || context._config.autoClose === 'outSIde' && isMenuTarget) {
             continue;
           } // Tab navigation through the dropdown menu or events from contained inputs shouldn't close the menu
 
@@ -4094,7 +4094,7 @@
       //  - If space key => not a dropdown command
       //  - If key is other than escape
       //    - If key is not up or down => not a dropdown command
-      //    - If trigger inside the menu => not a dropdown command
+      //    - If trigger inSIde the menu => not a dropdown command
       if (/input|textarea/i.test(event.target.tagName) ? event.key === SPACE_KEY || event.key !== ESCAPE_KEY$2 && (event.key !== ARROW_DOWN_KEY && event.key !== ARROW_UP_KEY || event.target.closest(SELECTOR_MENU)) : !REGEXP_KEYDOWN.test(event.key)) {
         return;
       }
@@ -4396,7 +4396,7 @@
    */
   const Default$6 = {
     trapElement: null,
-    // The element to trap focus inside of
+    // The element to trap focus inSIde of
     autofocus: true
   };
   const DefaultType$6 = {
@@ -6271,7 +6271,7 @@
         SelectorEngine.parents(link, SELECTOR_NAV_LIST_GROUP$1).forEach(listGroup => {
           // Set triggered links parents as active
           // With both <ul> and <nav> markup a parent is the previous sibling of any nav ancestor
-          SelectorEngine.prev(listGroup, `${SELECTOR_NAV_LINKS}, ${SELECTOR_LIST_ITEMS}`).forEach(item => item.classList.add(CLASS_NAME_ACTIVE$1)); // Handle special case when .nav-link is inside .nav-item
+          SelectorEngine.prev(listGroup, `${SELECTOR_NAV_LINKS}, ${SELECTOR_LIST_ITEMS}`).forEach(item => item.classList.add(CLASS_NAME_ACTIVE$1)); // Handle special case when .nav-link is inSIde .nav-item
 
           SelectorEngine.prev(listGroup, SELECTOR_NAV_ITEMS).forEach(navItem => {
             SelectorEngine.children(navItem, SELECTOR_NAV_LINKS).forEach(item => item.classList.add(CLASS_NAME_ACTIVE$1));

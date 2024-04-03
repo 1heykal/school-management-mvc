@@ -296,7 +296,7 @@ svg {
 }
 
 table {
-  caption-side: bottom;
+  caption-SIde: bottom;
   border-collapse: collapse;
 }
 
@@ -1976,7 +1976,7 @@ progress {
 }
 
 .caption-top {
-  caption-side: top;
+  caption-SIde: top;
 }
 
 .table-sm > :not(caption) > * > * {
