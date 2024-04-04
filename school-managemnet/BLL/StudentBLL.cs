@@ -1,50 +1,51 @@
 ﻿using SchoolManagement.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
 using SchoolManagement.Data;
 
 namespace SchoolManagement.BLL
 {
 
-    public class StudentBLL : IStudent
+    public class StudentBll : IStudent
     {
         private readonly SchoolContext _context;
 
-        public StudentBLL(SchoolContext context)
+        public StudentBll(SchoolContext context)
         {
             _context = context;
         }
 
-        public Student GetByID(string Id)
+        public async Task<Student> GetById(int id)
         {
-            return _context.Students.FirstOrDefault(s => s.Id == Id);
+            return await _context.Students.
+                Include(s => s.Enrollments)
+                .ThenInclude(e => e.Course)
+                .FirstOrDefaultAsync(s => s.Id == id);
         }
 
-        public List<Student> GetAll()
+        public async Task<List<Student>> GetAll()
         {
-            return _context.Students.ToList();
+            return await _context.Students.ToListAsync();
         }
 
-        public Student Add(Student student)
+        public async Task<Student> Add(Student student)
         {
-            _context.Students.Add(student);
-            _context.SaveChanges();
+            await _context.Students.AddAsync(student);
+            await _context.SaveChangesAsync();
             return student;
         }
 
-        public Student Edit(Student student)
+        public async Task<Student> Edit(Student student)
         {
             _context.Students.Update(student);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return student;
         }
 
-        public void Delete(string id)
+        public async Task Delete(int id)
         {
-            var student = GetByID(id);
+            var student = await GetById(id);
             _context.Students.Remove(student);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
     }

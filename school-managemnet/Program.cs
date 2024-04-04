@@ -24,8 +24,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<SchoolContext>();
 
 
-builder.Services.AddScoped<IStudent, StudentBLL>();
-builder.Services.AddScoped<IDepartment, DepartmentBLL>();
+builder.Services.AddScoped<IStudent, StudentBll>();
+builder.Services.AddScoped<IDepartment, DepartmentBll>();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 

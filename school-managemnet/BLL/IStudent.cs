@@ -5,19 +5,19 @@ namespace SchoolManagement.BLL
 {
     public interface IStudent
     {
-        public Student GetByID(string Id);
+        public Task<Student> GetById(int id);
 
 
-        public List<Student> GetAll();
+        public Task<List<Student>> GetAll();
 
 
-        public Student Add(Student student);
+        public Task<Student> Add(Student student);
 
 
-        public Student Edit(Student student);
+        public Task<Student> Edit(Student student);
 
 
-        public void Delete(string id);
+        public Task Delete(int id);
 
     }
 }

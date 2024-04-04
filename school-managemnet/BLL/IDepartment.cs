@@ -5,7 +5,7 @@ namespace SchoolManagement.BLL
 {
     public interface IDepartment
     {
-        public Department GetByID(int Id);
+        public Department GetById(int id);
 
         public List<Department> GetAll();
 

@@ -8,8 +8,8 @@ namespace SchoolManagement.ViewModels
 {
     public class StudentDepartmentViewModel
     {
-        public Student student { get; set; }
-        public Department department { get; set; }
+        public Student Student { get; set; }
+        public Department Department { get; set; }
 
     }
 }

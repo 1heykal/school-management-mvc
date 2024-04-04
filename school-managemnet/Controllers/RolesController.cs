@@ -8,11 +8,11 @@ namespace SchoolManagement.Controllers
     [Authorize(Roles = "Admin")] // [Authorize(Roles = "Admin,Student")]
     public class RolesController : Controller
     {
-        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public RolesController(RoleManager<IdentityRole> roleManager) 
         {
-            this.roleManager = roleManager;
+            this._roleManager = roleManager;
         }
 
         // Create Role
@@ -25,13 +25,13 @@ namespace SchoolManagement.Controllers
 
         // Submit
         [HttpPost]
-        public async Task<IActionResult> New(RoleViewModel newRoleVM)
+        public async Task<IActionResult> New(RoleViewModel newRoleVm)
         {
             if(ModelState.IsValid)
             {
                 IdentityRole role = new();
-                role.Name = newRoleVM.RoleName;
-                IdentityResult result = await roleManager.CreateAsync(role);
+                role.Name = newRoleVm.RoleName;
+                IdentityResult result = await _roleManager.CreateAsync(role);
                 if(result.Succeeded)
                 {
                     return View(new RoleViewModel());
@@ -42,7 +42,7 @@ namespace SchoolManagement.Controllers
                 }
             }
            
-            return View(newRoleVM);
+            return View(newRoleVm);
         }
     }
 }

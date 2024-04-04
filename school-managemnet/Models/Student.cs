@@ -5,13 +5,14 @@ using System.Text.Json.Serialization;
 
 namespace SchoolManagement.Models
 {
-    public class Student : ApplicationUser
+    public class Student
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [JsonIgnore]
-        public int SId { get; set; }
+        public int Id { get; set; }
+        [Required]
+        public string FirstName { get; set; }
+        [Required]
+        public string LastName { get; set; }
         public DateTime EnrollmentDate { get; set; }
-        
         public ICollection<Enrollment> Enrollments { get; init; }
     }
 }

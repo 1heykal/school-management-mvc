@@ -12,17 +12,17 @@ namespace SchoolManagement.Controllers
     //[Authorize]
     public class DepartmentController : Controller
     {
-        private readonly IDepartment db;
+        private readonly IDepartment _db;
 
-        public DepartmentController(IDepartment _db)
+        public DepartmentController(IDepartment db)
         {
-            db = _db;
+            this._db = db;
         }
 
 
         public IActionResult Details(Department department)
         {
-            Department dept = db.GetByID(department.Id);
+            Department dept = _db.GetById(department.Id);
             return View(dept);
         }
 
@@ -33,7 +33,7 @@ namespace SchoolManagement.Controllers
 
             if (ModelState.IsValid)
             {
-                db.Add(department);
+                _db.Add(department);
                 return RedirectToAction("Index");
             }
 
@@ -53,7 +53,7 @@ namespace SchoolManagement.Controllers
 
             if (ModelState.IsValid)
             {
-                db.Edit(department);
+                _db.Edit(department);
                 return RedirectToAction("Details", department);
             }
 
@@ -62,13 +62,13 @@ namespace SchoolManagement.Controllers
         }
         public IActionResult Edit(int id)
         {
-            return View(db.GetByID(id));
+            return View(_db.GetById(id));
         }
 
         [AllowAnonymous]
         public IActionResult Index()
         {
-            var model = db.GetAll();
+            var model = _db.GetAll();
             return View(model);
         }
 
@@ -76,14 +76,14 @@ namespace SchoolManagement.Controllers
         [HttpPost]
         public IActionResult Delete(Department department)
         {
-            db.Delete(department.Id);
+            _db.Delete(department.Id);
             return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int? id)
         {
 
-            return View(db.GetByID(id.Value));
+            return View(_db.GetById(id.Value));
         }
 
     }

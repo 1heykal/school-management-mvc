@@ -6,16 +6,16 @@ using SchoolManagement.Data;
 
 namespace SchoolManagement.BLL
 {
-    public class DepartmentBLL : IDepartment
+    public class DepartmentBll : IDepartment
     {
         private readonly SchoolContext _context;
 
-        public DepartmentBLL(SchoolContext context)
+        public DepartmentBll(SchoolContext context)
         {
             _context = context;
         }
 
-        public Department GetByID(int Id)
+        public Department GetById(int id)
         {
             return null; //_context.Departments.Find(Id);
         }
@@ -41,7 +41,7 @@ namespace SchoolManagement.BLL
 
         public void Delete(int id)
         {
-            var dept = GetByID(id);
+            var dept = GetById(id);
          //   _context.Departments.Remove(dept);
             _context.SaveChanges();
             

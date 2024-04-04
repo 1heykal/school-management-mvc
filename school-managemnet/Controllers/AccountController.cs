@@ -12,14 +12,14 @@ namespace SchoolManagement.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<ApplicationUser> userManager;
-        private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
         public AccountController
-            (UserManager<ApplicationUser> _userManager, SignInManager<ApplicationUser> _SignInManager)
+            (UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
-            userManager = _userManager;
-            signInManager = _SignInManager;
+            this._userManager = userManager;
+            _signInManager = signInManager;
         }
 
         [HttpGet]
@@ -30,26 +30,26 @@ namespace SchoolManagement.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAdmin(RegisterUserViewModel newUserVM)
+        public async Task<IActionResult> AddAdmin(RegisterUserViewModel newUserVm)
         {
             if (ModelState.IsValid)
             {
                 //create account
                 ApplicationUser userModel = new ApplicationUser()
                 {
-                    UserName = newUserVM.UserName,
-                    PasswordHash = newUserVM.Password,
-                    Address = newUserVM.Address
+                    UserName = newUserVm.UserName,
+                    PasswordHash = newUserVm.Password,
+                    Address = newUserVm.Address
                 };
 
 
-                IdentityResult result = await userManager.CreateAsync(userModel, newUserVM.Password);
+                IdentityResult result = await _userManager.CreateAsync(userModel, newUserVm.Password);
                 if (result.Succeeded)
                 {
                     //Assign Role
-                    await userManager.AddToRoleAsync(userModel, "Admin");
+                    await _userManager.AddToRoleAsync(userModel, "Admin");
                     //create cookie
-                    await signInManager.SignInAsync(userModel, false);
+                    await _signInManager.SignInAsync(userModel, false);
                     return RedirectToAction("Index", "Student");
                 }
                 else
@@ -61,7 +61,7 @@ namespace SchoolManagement.Controllers
                 }
 
             }
-            return View(newUserVM);
+            return View(newUserVm);
         }
 
 
@@ -74,23 +74,23 @@ namespace SchoolManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel UserVM)
+        public async Task<IActionResult> Login(LoginViewModel userVm)
         {
             if (ModelState.IsValid)
             {
-                var userModel = await userManager.FindByNameAsync(UserVM.UserName);
+                var userModel = await _userManager.FindByNameAsync(userVm.UserName);
                 if (userModel != null)
                 {
-                    bool found = await userManager.CheckPasswordAsync(userModel, UserVM.Password);
+                    bool found = await _userManager.CheckPasswordAsync(userModel, userVm.Password);
                     if (found)
                     {
                         //await signInManager.SignInAsync(userModel, UserVM.RememberMe);
-                        List<Claim> Claims = [new("Address", userModel.Address)];
+                        List<Claim> claims = [new("Address", userModel.Address)];
 
-                        await signInManager.SignInWithClaimsAsync(
+                        await _signInManager.SignInWithClaimsAsync(
                         userModel,
-                        UserVM.RememberMe,
-                        Claims
+                        userVm.RememberMe,
+                        claims
                         );
                         return RedirectToAction("Index", "Student");
                     }
@@ -98,7 +98,7 @@ namespace SchoolManagement.Controllers
                 ModelState.AddModelError("", "Inavalid username or password.");
 
             }
-            return View(UserVM);
+            return View(userVm);
         }
 
 
@@ -110,7 +110,7 @@ namespace SchoolManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterUserViewModel newUserVM)
+        public async Task<IActionResult> Register(RegisterUserViewModel newUserVm)
         {
 
             if (ModelState.IsValid)
@@ -118,17 +118,17 @@ namespace SchoolManagement.Controllers
                 //create account
                 ApplicationUser userModel = new ApplicationUser()
                 {
-                    UserName = newUserVM.UserName,
-                    PasswordHash = newUserVM.Password,
-                    Address = newUserVM.Address
+                    UserName = newUserVm.UserName,
+                    PasswordHash = newUserVm.Password,
+                    Address = newUserVm.Address
                 };
 
 
-                IdentityResult result = await userManager.CreateAsync(userModel, newUserVM.Password);
+                IdentityResult result = await _userManager.CreateAsync(userModel, newUserVm.Password);
                 if (result.Succeeded)
                 {
                     //create cookie
-                    await signInManager.SignInAsync(userModel, false);
+                    await _signInManager.SignInAsync(userModel, false);
                     return RedirectToAction("Index", "Student");
                 }
                 else
@@ -140,14 +140,14 @@ namespace SchoolManagement.Controllers
                 }
 
             }
-            return View(newUserVM);
+            return View(newUserVm);
         }
 
 
 
         public async Task<IActionResult> Logout()
         {
-            await signInManager.SignOutAsync();
+            await _signInManager.SignOutAsync();
             return RedirectToAction("Login");
         }
 

@@ -10,51 +10,49 @@ namespace SchoolManagement.Controllers
     public class StudentController : Controller
     {
         private readonly IStudent _db;
-        private readonly IDepartment _departmentBLL;
 
 
-        public StudentController(IStudent db, IDepartment departmentBLL)
+        public StudentController(IStudent db)
         {
             _db = db;
-            _departmentBLL = departmentBLL;
         }
 
         // [Authorize]
-        public IActionResult Details(Student student)
+        public async Task<IActionResult> Details(int id)
         {
-            Student stu = _db.GetByID(student.Id);
-            return View(stu);
+            Student student = await _db.GetById(id);
+            return View(student);
         }
 
-        public IActionResult DisplayEdited()
+        public async Task<IActionResult> DisplayEdited()
         {
-            string id = HttpContext.Session.GetString("Id");
+            int id = HttpContext.Session.GetInt32("Id")?? 0;
             if (id != null)
             {
-                Student stu = _db.GetByID(id);
+                Student stu = await _db.GetById(id);
                 return View(stu);
             }
             return Content("No id provided");
         }
 
-        public IActionResult DisplayCreated()
+        public async Task<IActionResult> DisplayCreated()
         {
 
-            if (Request.Cookies["CId"] is string id)
+            //  if ((Request.Cookies["CId"]?? 0) is int id)
             {
-                Student st = _db.GetByID(id);
-                return View(st);
+               // Student st = await _db.GetById(id);
+                return View(); // st
             }
 
 
             return Content("No id provided");
         }
 
-        public IActionResult CheckEmail(string email, int id)
+        public async Task<IActionResult> CheckEmail(string email, int id)
         {
-            List<Student> result = _db.GetAll().Where(s => s.Email == email).ToList();
+            List<Student> result = await _db.GetAll();
 
-            if (result.Count == 0 || (result.Count == 1 && result[0].SId == id))
+            if (result.Count == 0 || (result.Count == 1 && result[0].Id == id))
             {
                 return Json(true);
             }
@@ -63,25 +61,25 @@ namespace SchoolManagement.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Student student)
+        public async Task<IActionResult> Create(Student student)
         {
 
             if (ModelState.IsValid)
             {
-                _db.Add(student);
+                await _db.Add(student);
                 Response.Cookies.Append("CId", student.Id + "");
                 Response.Cookies.Append("CName", student.FirstName);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.departments = new SelectList(_departmentBLL.GetAll(), "Id", "Name");
+            // ViewBag.Courses = new SelectList(_departmentBLL.GetAll(), "Id", "Name");
             return View();
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.departments = new SelectList(_departmentBLL.GetAll(), "Id", "Name");
+          //  ViewBag.departments = new SelectList(_departmentBLL.GetAll(), "Id", "Name");
             return View();
         }
 
@@ -92,40 +90,40 @@ namespace SchoolManagement.Controllers
             if (ModelState.IsValid)
             {
                 _db.Edit(student);
-                HttpContext.Session.SetString("Id", student.Id);
+                HttpContext.Session.SetInt32("Id", student.Id);
                 HttpContext.Session.SetString("Name", student.FirstName);
                 return RedirectToAction("Index");
             }
-            ViewBag.departments = new SelectList(_departmentBLL.GetAll(), "Id", "Name");
+            // ViewBag.departments = new SelectList(_departmentBLL.GetAll(), "Id", "Name");
             return View(student);
 
 
         }
-        public IActionResult Edit(string id)
+        public async Task<IActionResult> Edit(int id)
         {
-            Student st = _db.GetByID(id);
-            ViewBag.departments = new SelectList(_departmentBLL.GetAll(), "Id", "Name");
+            Student st = await _db.GetById(id);
+            // ViewBag.departments = new SelectList(_departmentBLL.GetAll(), "Id", "Name");
             return View(st);
         }
 
         [Authorize]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var s = User.Identity.Name;
-            var model = _db.GetAll();
+            var s = User.Identity?.Name;
+            var model = await _db.GetAll();
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Delete(Student student)
+        public async Task<IActionResult> Delete(Student student)
         {
-            _db.Delete(student.Id);
+            await _db.Delete(student.Id);
             return RedirectToAction("Index");
         }
 
-        public IActionResult Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
-            return View(_db.GetByID(id));
+            return View(await _db.GetById(id));
         }
 
 

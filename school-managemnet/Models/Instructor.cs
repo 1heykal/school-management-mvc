@@ -5,10 +5,10 @@ using System.Runtime.InteropServices;
 
 namespace SchoolManagement.Models
 {
-    public class Instructor : ApplicationUser
+    public class Instructor
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IId { get; set; }
+        public int Id { get; set; }
         public decimal Salary { get; set; }
         public string Gender { get; set; }
         public DateOnly HireDate { get; set; }
