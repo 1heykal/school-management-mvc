@@ -19,6 +19,7 @@ namespace SchoolManagement.BLL
             return await _context.Students.
                 Include(s => s.Enrollments)
                 .ThenInclude(e => e.Course)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(s => s.Id == id);
         }
 
@@ -43,7 +44,10 @@ namespace SchoolManagement.BLL
 
         public async Task Delete(int id)
         {
-            var student = await GetById(id);
+            var student = await _context.Students.FindAsync(id);
+            if (student is null)
+                return;
+            
             _context.Students.Remove(student);
             await _context.SaveChangesAsync();
         }

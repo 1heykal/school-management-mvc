@@ -7,20 +7,14 @@ using Microsoft.AspNetCore.Authorization;
 namespace SchoolManagement.Controllers
 {
     [Authorize]
-    public class StudentController : Controller
+    public class StudentController(IStudent db, ILogger<StudentController> logger) : Controller
     {
-        private readonly IStudent _db;
-
-
-        public StudentController(IStudent db)
-        {
-            _db = db;
-        }
+        private readonly ILogger<StudentController> _logger = logger;
 
         // [Authorize]
         public async Task<IActionResult> Details(int id)
         {
-            Student student = await _db.GetById(id);
+            Student student = await db.GetById(id);
             return View(student);
         }
 
@@ -29,7 +23,7 @@ namespace SchoolManagement.Controllers
             int id = HttpContext.Session.GetInt32("Id")?? 0;
             if (id != null)
             {
-                Student stu = await _db.GetById(id);
+                Student stu = await db.GetById(id);
                 return View(stu);
             }
             return Content("No id provided");
@@ -40,7 +34,7 @@ namespace SchoolManagement.Controllers
 
             //  if ((Request.Cookies["CId"]?? 0) is int id)
             {
-               // Student st = await _db.GetById(id);
+               // Student st = await db.GetById(id);
                 return View(); // st
             }
 
@@ -50,7 +44,7 @@ namespace SchoolManagement.Controllers
 
         public async Task<IActionResult> CheckEmail(string email, int id)
         {
-            List<Student> result = await _db.GetAll();
+            List<Student> result = await db.GetAll();
 
             if (result.Count == 0 || (result.Count == 1 && result[0].Id == id))
             {
@@ -61,72 +55,74 @@ namespace SchoolManagement.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Student student)
+        public async Task<IActionResult> Create([FromBody] Student student)
         {
 
             if (ModelState.IsValid)
             {
-                await _db.Add(student);
+                await db.Add(student);
                 Response.Cookies.Append("CId", student.Id + "");
                 Response.Cookies.Append("CName", student.FirstName);
                 return RedirectToAction("Index");
             }
-
-            // ViewBag.Courses = new SelectList(_departmentBLL.GetAll(), "Id", "Name");
             return View();
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-          //  ViewBag.departments = new SelectList(_departmentBLL.GetAll(), "Id", "Name");
             return View();
         }
 
         [HttpPost]
-        public IActionResult Edit(Student student)
+        public async Task<IActionResult> Edit(Student model)
         {
-
-            if (ModelState.IsValid)
-            {
-                _db.Edit(student);
-                HttpContext.Session.SetInt32("Id", student.Id);
-                HttpContext.Session.SetString("Name", student.FirstName);
-                return RedirectToAction("Index");
-            }
-            // ViewBag.departments = new SelectList(_departmentBLL.GetAll(), "Id", "Name");
-            return View(student);
-
-
+            var student = await db.GetById(model.Id);
+            if(student is null)
+                return NotFound();
+                
+            if (!ModelState.IsValid)
+                return View(model);
+            
+            await db.Edit(model);
+            
+            HttpContext.Session.SetInt32("Id", model.Id);
+            HttpContext.Session.SetString("Name", model.FirstName);
+            
+            return RedirectToAction("Index");
         }
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int? id)
         {
-            Student st = await _db.GetById(id);
-            // ViewBag.departments = new SelectList(_departmentBLL.GetAll(), "Id", "Name");
-            return View(st);
+            if (id is null)
+                return NotFound();
+            
+            var student = await db.GetById(id.Value);
+
+            if (student is null)
+                return NotFound();
+            
+            return View(student);
         }
 
         [Authorize]
         public async Task<IActionResult> Index()
         {
             var s = User.Identity?.Name;
-            var model = await _db.GetAll();
+            var model = await db.GetAll();
             return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(Student student)
         {
-            await _db.Delete(student.Id);
+            await db.Delete(student.Id);
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            return View(await _db.GetById(id));
+            return View(await db.GetById(id));
         }
-
-
-
+        
     }
 }
