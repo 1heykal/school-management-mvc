@@ -1,10 +1,10 @@
 @model IEnumerable<SchoolManagement.Models.Student>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Students";
 }
 
-<h1>Index</h1>
+<h1>Students</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,16 +13,17 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+
+               @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EnrollmentDate)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSort"]"> @Html.DisplayNameFor(model => model.EnrollmentDate)</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastName)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSort"]">@Html.DisplayNameFor(model => model.LastName)</a>
             </th>
         </tr>
     </thead>

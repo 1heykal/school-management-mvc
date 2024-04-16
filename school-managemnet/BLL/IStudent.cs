@@ -8,7 +8,7 @@ namespace SchoolManagement.BLL
         public Task<Student> GetById(int id);
 
 
-        public Task<List<Student>> GetAll();
+        public IQueryable<Student> GetAll();
 
 
         public Task<Student> Add(Student student);

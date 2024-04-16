@@ -23,9 +23,9 @@ namespace SchoolManagement.BLL
                 .FirstOrDefaultAsync(s => s.Id == id);
         }
 
-        public async Task<List<Student>> GetAll()
+        public  IQueryable<Student> GetAll()
         {
-            return await _context.Students.ToListAsync();
+            return _context.Students;
         }
 
         public async Task<Student> Add(Student student)
